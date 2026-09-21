@@ -4,17 +4,10 @@ import {
   Apple,
   ArrowRight,
   BadgePercent,
-  Banana,
-  Box,
-  Carrot,
   ChevronRight,
   Clock3,
   Coffee,
   Cookie,
-  Citrus,
-  Drumstick,
-  Egg,
-  Fish,
   Home,
   Leaf,
   MapPin,
@@ -22,9 +15,8 @@ import {
   Minus,
   Package,
   Plus,
-  Sandwich,
   Search,
-  Salad,
+  Sandwich,
   ShieldCheck,
   ShoppingCart,
   Sparkles,
@@ -32,6 +24,7 @@ import {
   Truck,
   UserRound,
   X,
+  Fish,
 } from 'lucide-react'
 import './App.css'
 
@@ -48,7 +41,7 @@ interface Product {
   price: number
   originalPrice?: number
   quantity: string
-  icon: LucideIcon
+  image: string
 }
 
 interface CartItem {
@@ -58,7 +51,7 @@ interface CartItem {
   price: number
   originalPrice?: number
   quantity: string
-  icon?: LucideIcon
+  image: string
   quantityCount: number
 }
 
@@ -75,20 +68,33 @@ const categories: Category[] = [
   { id: 'meat', name: 'Meat & Seafood', icon: Fish },
 ]
 
+// Product card photography. Replace these URLs with the exact Unsplash photos later.
+const productImages = {
+  bananas: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=640&q=85',
+  redApples: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=640&q=85',
+  tomatoes: 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=640&q=85',
+  spinach: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=640&q=85',
+  carrots: 'https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=640&q=85',
+  milk: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=640&q=85',
+  curd: 'https://images.unsplash.com/photo-1571212515416-fef01fc43637?auto=format&fit=crop&w=640&q=85',
+  eggs: 'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=640&q=85',
+  bread: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=640&q=85',
+  rice: 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&w=640&q=85',
+  salmon: 'https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?auto=format&fit=crop&w=640&q=85',
+}
+
 const products: Product[] = [
-  { id: 'bananas', name: 'Bananas', category: 'fruits', price: 56, originalPrice: 72, quantity: '1 bunch', icon: Banana },
-  { id: 'red-apples', name: 'Red Apples', category: 'fruits', price: 124, originalPrice: 149, quantity: '1 kg', icon: Apple },
-  { id: 'tomato', name: 'Tomatoes', category: 'fruits', price: 42, originalPrice: 52, quantity: '1 kg', icon: Citrus },
-  { id: 'spinach', name: 'Spinach', category: 'fruits', price: 30, originalPrice: 38, quantity: '200 g', icon: Salad },
-  { id: 'carrot', name: 'Carrots', category: 'fruits', price: 40, originalPrice: 48, quantity: '1 kg', icon: Carrot },
-  { id: 'farm-milk', name: 'Farm Fresh Milk', category: 'dairy', price: 54, originalPrice: 66, quantity: '1 litre', icon: Milk },
-  { id: 'paneer', name: 'Paneer Cubes', category: 'dairy', price: 110, originalPrice: 128, quantity: '200 g', icon: Box },
-  { id: 'plain-curd', name: 'Plain Curd', category: 'dairy', price: 58, originalPrice: 70, quantity: '500 g', icon: Milk },
-  { id: 'eggs', name: 'Free Range Eggs', category: 'dairy', price: 82, originalPrice: 95, quantity: '6 pack', icon: Egg },
-  { id: 'whole-wheat-bread', name: 'Whole Wheat Bread', category: 'bakery', price: 48, originalPrice: 58, quantity: '400 g', icon: Sandwich },
-  { id: 'basmati-rice', name: 'Basmati Rice', category: 'staples', price: 182, originalPrice: 215, quantity: '1 kg', icon: Package },
-  { id: 'chicken', name: 'Chicken Breast', category: 'meat', price: 214, originalPrice: 246, quantity: '500 g', icon: Drumstick },
-  { id: 'salmon', name: 'Salmon Fillet', category: 'meat', price: 320, originalPrice: 360, quantity: '250 g', icon: Fish },
+  { id: 'bananas', name: 'Bananas', category: 'fruits', price: 56, originalPrice: 72, quantity: '1 bunch', image: productImages.bananas },
+  { id: 'red-apples', name: 'Red Apples', category: 'fruits', price: 124, originalPrice: 149, quantity: '1 kg', image: productImages.redApples },
+  { id: 'tomato', name: 'Tomatoes', category: 'fruits', price: 42, originalPrice: 52, quantity: '1 kg', image: productImages.tomatoes },
+  { id: 'spinach', name: 'Spinach', category: 'fruits', price: 30, originalPrice: 38, quantity: '200 g', image: productImages.spinach },
+  { id: 'carrot', name: 'Carrots', category: 'fruits', price: 40, originalPrice: 48, quantity: '1 kg', image: productImages.carrots },
+  { id: 'farm-milk', name: 'Farm Fresh Milk', category: 'dairy', price: 54, originalPrice: 66, quantity: '1 litre', image: productImages.milk },
+  { id: 'plain-curd', name: 'Plain Curd', category: 'dairy', price: 58, originalPrice: 70, quantity: '500 g', image: productImages.curd },
+  { id: 'eggs', name: 'Free Range Eggs', category: 'dairy', price: 82, originalPrice: 95, quantity: '6 pack', image: productImages.eggs },
+  { id: 'whole-wheat-bread', name: 'Whole Wheat Bread', category: 'bakery', price: 48, originalPrice: 58, quantity: '400 g', image: productImages.bread },
+  { id: 'basmati-rice', name: 'Basmati Rice', category: 'staples', price: 182, originalPrice: 215, quantity: '1 kg', image: productImages.rice },
+  { id: 'salmon', name: 'Salmon Fillet', category: 'meat', price: 320, originalPrice: 360, quantity: '250 g', image: productImages.salmon },
 ]
 
 // Hero decorative imagery. Replace these URLs with the exact Unsplash photos later.
@@ -164,13 +170,11 @@ function ProductCard({
 }
 
 function ProductVisual({ product }: { product: Product }) {
-  const Icon = product.icon
-
   return (
     <div className="product-image-wrap">
       <div className="product-visual" aria-label={product.name}>
         <div className="visual-backdrop" aria-hidden="true" />
-        <Icon size={62} strokeWidth={1.8} />
+        <img src={product.image} alt={product.name} />
       </div>
     </div>
   )
@@ -223,7 +227,7 @@ function App() {
             price: item.price ?? productMatch?.price ?? 0,
             originalPrice: item.originalPrice ?? productMatch?.originalPrice,
             quantity: item.quantity ?? productMatch?.quantity ?? '',
-            icon: item.icon ?? productMatch?.icon ?? Apple,
+            image: item.image ?? productMatch?.image ?? '',
             quantityCount: item.quantityCount ?? 1,
           }
         })
@@ -575,12 +579,10 @@ function App() {
           <>
             <div className="cart-items">
               {cart.map((item) => {
-                const CartIcon = item.icon ?? Apple
-
                 return (
                   <div key={item.id} className="cart-item">
                     <div className="cart-item-visual" aria-label={item.name}>
-                      <CartIcon size={24} />
+                      <img src={item.image} alt={item.name} />
                     </div>
                     <div className="cart-item-meta">
                       <div className="cart-item-header">
@@ -595,7 +597,7 @@ function App() {
                           <Minus size={14} />
                         </button>
                         <span>{item.quantityCount}</span>
-                        <button type="button" onClick={() => addToCart({ ...item, icon: item.icon ?? Apple })}>
+                        <button type="button" onClick={() => addToCart(item)}>
                           <Plus size={14} />
                         </button>
                       </div>
