@@ -5,11 +5,14 @@ import {
   ArrowRight,
   BadgePercent,
   Banana,
+  Box,
   Carrot,
   ChevronRight,
   Clock3,
   Coffee,
   Cookie,
+  Citrus,
+  Drumstick,
   Egg,
   Fish,
   Home,
@@ -21,6 +24,7 @@ import {
   Plus,
   Sandwich,
   Search,
+  Salad,
   ShieldCheck,
   ShoppingCart,
   Sparkles,
@@ -74,18 +78,26 @@ const categories: Category[] = [
 const products: Product[] = [
   { id: 'bananas', name: 'Bananas', category: 'fruits', price: 56, originalPrice: 72, quantity: '1 bunch', icon: Banana },
   { id: 'red-apples', name: 'Red Apples', category: 'fruits', price: 124, originalPrice: 149, quantity: '1 kg', icon: Apple },
-  { id: 'tomato', name: 'Tomatoes', category: 'fruits', price: 42, originalPrice: 52, quantity: '1 kg', icon: Leaf },
-  { id: 'spinach', name: 'Spinach', category: 'fruits', price: 30, originalPrice: 38, quantity: '200 g', icon: Leaf },
+  { id: 'tomato', name: 'Tomatoes', category: 'fruits', price: 42, originalPrice: 52, quantity: '1 kg', icon: Citrus },
+  { id: 'spinach', name: 'Spinach', category: 'fruits', price: 30, originalPrice: 38, quantity: '200 g', icon: Salad },
   { id: 'carrot', name: 'Carrots', category: 'fruits', price: 40, originalPrice: 48, quantity: '1 kg', icon: Carrot },
   { id: 'farm-milk', name: 'Farm Fresh Milk', category: 'dairy', price: 54, originalPrice: 66, quantity: '1 litre', icon: Milk },
-  { id: 'paneer', name: 'Paneer Cubes', category: 'dairy', price: 110, originalPrice: 128, quantity: '200 g', icon: Milk },
+  { id: 'paneer', name: 'Paneer Cubes', category: 'dairy', price: 110, originalPrice: 128, quantity: '200 g', icon: Box },
   { id: 'plain-curd', name: 'Plain Curd', category: 'dairy', price: 58, originalPrice: 70, quantity: '500 g', icon: Milk },
   { id: 'eggs', name: 'Free Range Eggs', category: 'dairy', price: 82, originalPrice: 95, quantity: '6 pack', icon: Egg },
   { id: 'whole-wheat-bread', name: 'Whole Wheat Bread', category: 'bakery', price: 48, originalPrice: 58, quantity: '400 g', icon: Sandwich },
   { id: 'basmati-rice', name: 'Basmati Rice', category: 'staples', price: 182, originalPrice: 215, quantity: '1 kg', icon: Package },
-  { id: 'chicken', name: 'Chicken Breast', category: 'meat', price: 214, originalPrice: 246, quantity: '500 g', icon: Package },
+  { id: 'chicken', name: 'Chicken Breast', category: 'meat', price: 214, originalPrice: 246, quantity: '500 g', icon: Drumstick },
   { id: 'salmon', name: 'Salmon Fillet', category: 'meat', price: 320, originalPrice: 360, quantity: '250 g', icon: Fish },
 ]
+
+// Hero decorative imagery. Replace these URLs with the exact Unsplash photos later.
+const heroProduceImages = {
+  banana: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=420&q=80',
+  apple: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=420&q=80',
+  orange: 'https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=420&q=80',
+  greens: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=420&q=80',
+}
 
 const featureList = [
   { title: 'Fast delivery', description: 'Fresh groceries at your doorstep in 15–30 minutes.', icon: Truck },
@@ -108,16 +120,9 @@ function ProductCard({
   onAdd: (product: Product) => void
   onDecrease: (productId: string) => void
 }) {
-  const Icon = product.icon
-
   return (
     <article className="product-card">
-      <div className="product-image-wrap">
-        <div className="product-visual" aria-label={product.name}>
-          <div className="visual-backdrop" aria-hidden="true" />
-          <Icon size={68} strokeWidth={1.8} />
-        </div>
-      </div>
+      <ProductVisual product={product} />
 
       <div className="product-body">
         <h3>{product.name}</h3>
@@ -154,6 +159,43 @@ function ProductCard({
           )}
         </div>
       </div>
+    </article>
+  )
+}
+
+function ProductVisual({ product }: { product: Product }) {
+  const Icon = product.icon
+
+  return (
+    <div className="product-image-wrap">
+      <div className="product-visual" aria-label={product.name}>
+        <div className="visual-backdrop" aria-hidden="true" />
+        <Icon size={62} strokeWidth={1.8} />
+      </div>
+    </div>
+  )
+}
+
+function PromoBanner({
+  eyebrow,
+  title,
+  action,
+  tone,
+}: {
+  eyebrow: string
+  title: string
+  action: string
+  tone: 'primary' | 'secondary'
+}) {
+  return (
+    <article className={`promo-banner ${tone === 'primary' ? 'primary-promo' : 'secondary-promo'}`}>
+      <div className="promo-content">
+        <p className="promo-label">{eyebrow}</p>
+        <h3>{title}</h3>
+      </div>
+      <button type="button" className="mini-button promo-action">
+        {action}
+      </button>
     </article>
   )
 }
@@ -326,21 +368,10 @@ function App() {
 
           <div className="hero-visual" aria-label="Fresh groceries visual">
             <div className="basket-scene">
-              <div className="hero-grocery hero-banana" aria-label="Bananas illustration">
-                <Banana size={52} strokeWidth={1.7} />
-              </div>
-              <div className="hero-grocery hero-milk" aria-label="Milk illustration">
-                <Milk size={42} strokeWidth={1.8} />
-              </div>
-              <div className="hero-grocery hero-tomato" aria-label="Tomato illustration">
-                <Leaf size={46} strokeWidth={1.8} />
-              </div>
-              <div className="hero-grocery hero-leafy" aria-label="Leafy greens illustration">
-                <Leaf size={54} strokeWidth={1.8} />
-              </div>
-              <div className="hero-grocery hero-bread" aria-label="Bread illustration">
-                <Sandwich size={48} strokeWidth={1.8} />
-              </div>
+              <img className="hero-produce hero-banana" src={heroProduceImages.banana} alt="" aria-hidden="true" />
+              <img className="hero-produce hero-apple" src={heroProduceImages.apple} alt="" aria-hidden="true" />
+              <img className="hero-produce hero-orange" src={heroProduceImages.orange} alt="" aria-hidden="true" />
+              <img className="hero-produce hero-greens" src={heroProduceImages.greens} alt="" aria-hidden="true" />
 
               <div className="basket-card">
                 <div className="basket-header">
@@ -377,25 +408,8 @@ function App() {
         </section>
 
         <section className="promo-grid">
-          <article className="promo-card primary-promo">
-            <div className="promo-content">
-              <p className="promo-label">Fresh picks</p>
-              <h3>Fresh picks. Better prices.</h3>
-            </div>
-            <button type="button" className="mini-button promo-action">
-              Shop now
-            </button>
-          </article>
-
-          <article className="promo-card secondary-promo">
-            <div className="promo-content">
-              <p className="promo-label">First order</p>
-              <h3>Free delivery on your first order.</h3>
-            </div>
-            <button type="button" className="mini-button promo-action light-button">
-              Claim offer
-            </button>
-          </article>
+          <PromoBanner eyebrow="Fresh picks" title="Fresh picks. Better prices." action="Shop now" tone="primary" />
+          <PromoBanner eyebrow="First order" title="Free delivery on your first order." action="Claim offer" tone="secondary" />
         </section>
 
         <section className="category-section">
