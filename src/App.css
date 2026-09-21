@@ -177,6 +177,74 @@ button {
   gap: 10px;
 }
 
+.account-shell {
+  position: relative;
+}
+
+.account-popover {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 70;
+  width: 238px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.12);
+}
+
+.account-popover-heading {
+  display: grid;
+  gap: 3px;
+  padding: 2px 4px 10px;
+}
+
+.account-popover-heading strong {
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.account-popover-heading span {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.account-popover > button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.82rem;
+  text-align: left;
+}
+
+.account-popover > button svg {
+  color: var(--brand-strong);
+}
+
+.account-popover > button:hover {
+  color: var(--brand-strong);
+}
+
+.account-popover-divider {
+  height: 1px;
+  margin: 7px 0;
+  background: var(--border);
+}
+
+.account-popover .account-signin {
+  justify-content: center;
+  padding: 10px 4px 4px;
+  color: var(--brand-strong);
+  font-weight: 700;
+  text-align: center;
+}
+
 .icon-button {
   position: relative;
   width: 40px;
@@ -1800,6 +1868,108 @@ button {
 
 .success-modal .primary-button {
   margin-top: 24px;
+}
+
+.account-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.24);
+}
+
+.account-modal {
+  width: min(100%, 460px);
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: 0 22px 52px rgba(15, 23, 42, 0.16);
+}
+
+.account-modal-header,
+.order-summary-topline,
+.order-summary-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.account-modal-header {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.account-modal h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
+}
+
+.account-modal-close {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8f9f7;
+  color: var(--text);
+}
+
+.order-list {
+  display: grid;
+  gap: 10px;
+  padding-top: 14px;
+}
+
+.order-summary {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fafcfb;
+}
+
+.order-summary-topline strong,
+.order-summary-details strong {
+  color: var(--text);
+  font-size: 0.84rem;
+}
+
+.order-summary-topline span,
+.order-summary-details span {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.order-status {
+  color: var(--brand-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.account-empty-state {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 30px 10px 12px;
+  text-align: center;
+}
+
+.account-empty-state strong {
+  color: var(--text);
+}
+
+.account-empty-state p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.86rem;
 }
 
 @keyframes success-modal-in {

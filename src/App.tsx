@@ -56,6 +56,16 @@ interface CartItem {
   quantityCount: number
 }
 
+interface Order {
+  id: string
+  itemCount: number
+  subtotal: number
+  delivery: number
+  total: number
+  status: 'Placed'
+  createdAt: number
+}
+
 const categories: Category[] = [
   { id: 'all', name: 'All', icon: Sparkles },
   { id: 'fruits', name: 'Fruits & Vegetables', icon: Apple },
@@ -218,6 +228,9 @@ function App() {
   const [isCheckoutProcessing, setIsCheckoutProcessing] = useState(false)
   const [isOrderSuccessOpen, setIsOrderSuccessOpen] = useState(false)
   const [orderReference, setOrderReference] = useState('')
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [accountPanel, setAccountPanel] = useState<'orders' | 'addresses' | 'favorites' | 'signin' | null>(null)
+  const [orders, setOrders] = useState<Order[]>([])
   const [cart, setCart] = useState<CartItem[]>(() => {
     if (typeof window === 'undefined') return []
 
@@ -273,6 +286,27 @@ function App() {
     return () => document.removeEventListener('keydown', handleEscape)
   }, [isOrderSuccessOpen])
 
+  useEffect(() => {
+    if (!isAccountOpen && !accountPanel) return
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      setIsAccountOpen(false)
+      setAccountPanel(null)
+    }
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (!(event.target instanceof Element) || event.target.closest('.account-shell')) return
+      setIsAccountOpen(false)
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [isAccountOpen, accountPanel])
+
   const filteredProducts = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase()
 
@@ -325,10 +359,23 @@ function App() {
   const startCheckout = () => {
     if (cart.length === 0 || isCheckoutProcessing) return
 
+    const orderCart = [...cart]
+    const orderSubtotal = subtotal
+    const orderDelivery = deliveryFee
     setIsCheckoutProcessing(true)
     window.setTimeout(() => {
+      const nextOrder: Order = {
+        id: `LK-${Math.floor(1000 + Math.random() * 9000)}`,
+        itemCount: orderCart.reduce((count, item) => count + item.quantityCount, 0),
+        subtotal: orderSubtotal,
+        delivery: orderDelivery,
+        total: orderSubtotal + orderDelivery,
+        status: 'Placed',
+        createdAt: Date.now(),
+      }
       setIsCheckoutProcessing(false)
-      setOrderReference(`LK-${Math.floor(1000 + Math.random() * 9000)}`)
+      setOrderReference(nextOrder.id)
+      setOrders((currentOrders) => [nextOrder, ...currentOrders])
       setCart([])
       setIsCartOpen(false)
       setIsOrderSuccessOpen(true)
@@ -380,9 +427,38 @@ function App() {
               <ShoppingCart size={18} />
               {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
             </button>
-            <button type="button" className="icon-button account-button" aria-label="Account">
-              <UserRound size={18} />
-            </button>
+            <div className="account-shell">
+              <button
+                type="button"
+                className="icon-button account-button"
+                aria-label="Account"
+                aria-expanded={isAccountOpen}
+                onClick={() => setIsAccountOpen((open) => !open)}
+              >
+                <UserRound size={18} />
+              </button>
+              {isAccountOpen && (
+                <div className="account-popover" role="menu" aria-label="Account menu">
+                  <div className="account-popover-heading">
+                    <strong>My Account</strong>
+                    <span>Guest user</span>
+                  </div>
+                  <button type="button" role="menuitem" onClick={() => { setAccountPanel('orders'); setIsAccountOpen(false) }}>
+                    <Package size={16} /> My Orders
+                  </button>
+                  <button type="button" role="menuitem" onClick={() => { setAccountPanel('addresses'); setIsAccountOpen(false) }}>
+                    <MapPin size={16} /> Saved Addresses
+                  </button>
+                  <button type="button" role="menuitem" onClick={() => { setAccountPanel('favorites'); setIsAccountOpen(false) }}>
+                    <Star size={16} /> Favorites
+                  </button>
+                  <div className="account-popover-divider" />
+                  <button type="button" className="account-signin" role="menuitem" onClick={() => { setAccountPanel('signin'); setIsAccountOpen(false) }}>
+                    Sign in / Create account
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>
@@ -755,6 +831,82 @@ function App() {
             <button type="button" className="primary-button" onClick={continueShopping}>
               Continue shopping
             </button>
+          </div>
+        </div>
+      )}
+
+      {accountPanel && (
+        <div className="account-modal-backdrop" onClick={() => setAccountPanel(null)}>
+          <div
+            className="account-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="account-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="account-modal-header">
+              <h2 id="account-modal-title">
+                {accountPanel === 'orders' && 'My Orders'}
+                {accountPanel === 'addresses' && 'Saved addresses'}
+                {accountPanel === 'favorites' && 'Your favorites'}
+                {accountPanel === 'signin' && 'Sign in'}
+              </h2>
+              <button type="button" className="account-modal-close" aria-label="Close account panel" onClick={() => setAccountPanel(null)}>
+                <X size={18} />
+              </button>
+            </div>
+
+            {accountPanel === 'orders' && (orders.length > 0 ? (
+              <div className="order-list">
+                {orders.map((order) => (
+                  <article className="order-summary" key={order.id}>
+                    <div className="order-summary-topline">
+                      <strong>Order #{order.id}</strong>
+                      <span>Placed just now</span>
+                    </div>
+                    <div className="order-summary-details">
+                      <span>{order.itemCount} items</span>
+                      <strong>{formatCurrency(order.total)}</strong>
+                    </div>
+                    <span className="order-status">✓ {order.status}</span>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="account-empty-state">
+                <strong>No orders yet</strong>
+                <p>Your placed orders will appear here.</p>
+                <button type="button" className="primary-button" onClick={() => { setAccountPanel(null); scrollToSection('products') }}>
+                  Shop Groceries
+                </button>
+              </div>
+            ))}
+
+            {accountPanel === 'addresses' && (
+              <div className="account-empty-state">
+                <strong>No saved addresses yet.</strong>
+                <p>Address management coming soon.</p>
+                <button type="button" className="secondary-button" onClick={() => setAccountPanel(null)}>Add address</button>
+              </div>
+            )}
+
+            {accountPanel === 'favorites' && (
+              <div className="account-empty-state">
+                <strong>No favorites yet.</strong>
+                <p>Save products you love for quick access.</p>
+                <button type="button" className="primary-button" onClick={() => { setAccountPanel(null); scrollToSection('products') }}>
+                  Browse groceries
+                </button>
+              </div>
+            )}
+
+            {accountPanel === 'signin' && (
+              <div className="account-empty-state">
+                <strong>Sign in is coming soon.</strong>
+                <p>This demo does not require an account to shop.</p>
+                <button type="button" className="secondary-button" onClick={() => setAccountPanel(null)}>Close</button>
+              </div>
+            )}
           </div>
         </div>
       )}
