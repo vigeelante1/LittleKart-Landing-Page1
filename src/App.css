@@ -460,7 +460,7 @@ button {
 .category-section,
 .products-section,
 .features-section {
-  margin-top: 52px;
+  margin-top: 64px;
 }
 
 .section-heading-row {
@@ -469,6 +469,11 @@ button {
   justify-content: space-between;
   gap: 18px;
   margin-bottom: 18px;
+}
+
+.features-section .section-heading-row {
+  justify-content: flex-start;
+  margin-bottom: 24px;
 }
 
 .section-kicker {
@@ -763,7 +768,7 @@ button {
 }
 
 .center-heading {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .feature-grid {

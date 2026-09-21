@@ -70,9 +70,7 @@ const products: Product[] = [
     price: 56,
     originalPrice: 72,
     quantity: '1 bunch',
-    image:
-      'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=900&q=80',
-    tag: 'Best seller',
+    image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'red-apples',
@@ -81,9 +79,7 @@ const products: Product[] = [
     price: 124,
     originalPrice: 149,
     quantity: '1 kg',
-    image:
-      'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=900&q=80',
-    tag: 'Sweet',
+    image: 'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'oranges',
@@ -92,9 +88,7 @@ const products: Product[] = [
     price: 118,
     originalPrice: 138,
     quantity: '1 kg',
-    image:
-      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=900&q=80',
-    tag: 'Juicy',
+    image: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'mangoes',
@@ -103,9 +97,7 @@ const products: Product[] = [
     price: 135,
     originalPrice: 160,
     quantity: '1 kg',
-    image:
-      'https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=900&q=80',
-    tag: 'Seasonal',
+    image: 'https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'tomato',
@@ -114,9 +106,7 @@ const products: Product[] = [
     price: 42,
     originalPrice: 52,
     quantity: '1 kg',
-    image:
-      'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=900&q=80',
-    tag: 'Farm pick',
+    image: 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'potato',
@@ -125,9 +115,7 @@ const products: Product[] = [
     price: 36,
     originalPrice: 44,
     quantity: '1 kg',
-    image:
-      'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=900&q=80',
-    tag: 'Staple',
+    image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'onion',
@@ -136,9 +124,7 @@ const products: Product[] = [
     price: 38,
     originalPrice: 46,
     quantity: '1 kg',
-    image:
-      'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=900&q=80',
-    tag: 'Fresh',
+    image: 'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'spinach',
@@ -147,9 +133,7 @@ const products: Product[] = [
     price: 30,
     originalPrice: 38,
     quantity: '200 g',
-    image:
-      'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=900&q=80',
-    tag: 'Leafy',
+    image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'farm-milk',
@@ -158,9 +142,7 @@ const products: Product[] = [
     price: 54,
     originalPrice: 66,
     quantity: '1 litre',
-    image:
-      'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=900&q=80',
-    tag: 'Cold chain',
+    image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'paneer',
@@ -169,8 +151,7 @@ const products: Product[] = [
     price: 110,
     originalPrice: 128,
     quantity: '200 g',
-    image:
-      'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1604908553252-944e3d1d3127?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'plain-curd',
@@ -179,8 +160,7 @@ const products: Product[] = [
     price: 58,
     originalPrice: 70,
     quantity: '500 g',
-    image:
-      'https://images.unsplash.com/photo-1570587193867-0c0c0788f263?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1570587193867-0c0c0788f263?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'butter',
@@ -189,9 +169,7 @@ const products: Product[] = [
     price: 99,
     originalPrice: 118,
     quantity: '200 g',
-    image:
-      'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=900&q=80',
-    tag: 'Creamy',
+    image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'eggs',
@@ -200,9 +178,7 @@ const products: Product[] = [
     price: 82,
     originalPrice: 95,
     quantity: '6 pack',
-    image:
-      'https://images.unsplash.com/photo-1518569656558-1f25e69d93d7?auto=format&fit=crop&w=900&q=80',
-    tag: 'High protein',
+    image: 'https://images.unsplash.com/photo-1518569656558-1f25e69d93d7?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'whole-wheat-bread',
@@ -211,9 +187,7 @@ const products: Product[] = [
     price: 48,
     originalPrice: 58,
     quantity: '400 g',
-    image:
-      'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
-    tag: 'Fresh baked',
+    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'multigrain-bread',
@@ -222,9 +196,7 @@ const products: Product[] = [
     price: 62,
     originalPrice: 74,
     quantity: '400 g',
-    image:
-      'https://images.unsplash.com/photo-1549931314-a545dcf3bc73?auto=format&fit=crop&w=900&q=80',
-    tag: 'High fibre',
+    image: 'https://images.unsplash.com/photo-1549931314-a545dcf3bc73?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'classic-salted-chips',
@@ -233,9 +205,7 @@ const products: Product[] = [
     price: 32,
     originalPrice: 40,
     quantity: '55 g',
-    image:
-      'https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?auto=format&fit=crop&w=900&q=80',
-    tag: 'Crunchy',
+    image: 'https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'biscuits',
@@ -244,9 +214,7 @@ const products: Product[] = [
     price: 54,
     originalPrice: 66,
     quantity: '200 g',
-    image:
-      'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
-    tag: 'Tea-time',
+    image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'namkeen',
@@ -255,9 +223,7 @@ const products: Product[] = [
     price: 60,
     originalPrice: 72,
     quantity: '250 g',
-    image:
-      'https://images.unsplash.com/photo-1599490650514-4f7f5d9a17a4?auto=format&fit=crop&w=900&q=80',
-    tag: 'Classic',
+    image: 'https://images.unsplash.com/photo-1599490650514-4f7f5d9a17a4?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'citrus-soda',
@@ -266,9 +232,7 @@ const products: Product[] = [
     price: 68,
     originalPrice: 78,
     quantity: '250 ml',
-    image:
-      'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=80',
-    tag: 'Refreshing',
+    image: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'orange-juice',
@@ -277,9 +241,7 @@ const products: Product[] = [
     price: 96,
     originalPrice: 116,
     quantity: '1 litre',
-    image:
-      'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=900&q=80',
-    tag: 'Natural',
+    image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'mineral-water',
@@ -288,9 +250,7 @@ const products: Product[] = [
     price: 28,
     originalPrice: 35,
     quantity: '1 litre',
-    image:
-      'https://images.unsplash.com/photo-1622483767028-3f66f2b0a3d9?auto=format&fit=crop&w=900&q=80',
-    tag: 'Hydrate',
+    image: 'https://images.unsplash.com/photo-1622483767028-3f66f2b0a3d9?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'basmati-rice',
@@ -299,9 +259,7 @@ const products: Product[] = [
     price: 182,
     originalPrice: 215,
     quantity: '1 kg',
-    image:
-      'https://images.unsplash.com/photo-1586201375761-83865001e31b?auto=format&fit=crop&w=900&q=80',
-    tag: 'Premium',
+    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31b?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'wheat-flour',
@@ -310,9 +268,7 @@ const products: Product[] = [
     price: 134,
     originalPrice: 152,
     quantity: '5 kg',
-    image:
-      'https://images.unsplash.com/photo-1574856344991-aaa31b6f4ce9?auto=format&fit=crop&w=900&q=80',
-    tag: 'Fresh milled',
+    image: 'https://images.unsplash.com/photo-1574856344991-aaa31b6f4ce9?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'cooking-oil',
@@ -321,9 +277,7 @@ const products: Product[] = [
     price: 178,
     originalPrice: 210,
     quantity: '1 litre',
-    image:
-      'https://images.unsplash.com/photo-1474978528675-4a50a4508dc3?auto=format&fit=crop&w=900&q=80',
-    tag: 'Pure blend',
+    image: 'https://images.unsplash.com/photo-1474978528675-4a50a4508dc3?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'sugar',
@@ -332,9 +286,7 @@ const products: Product[] = [
     price: 58,
     originalPrice: 68,
     quantity: '1 kg',
-    image:
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80',
-    tag: 'Household',
+    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'chicken',
@@ -343,9 +295,7 @@ const products: Product[] = [
     price: 214,
     originalPrice: 246,
     quantity: '500 g',
-    image:
-      'https://images.unsplash.com/photo-1607623814075-e51df1d6f6b4?auto=format&fit=crop&w=900&q=80',
-    tag: 'Protein',
+    image: 'https://images.unsplash.com/photo-1607623814075-e51df1d6f6b4?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'salmon',
@@ -354,9 +304,7 @@ const products: Product[] = [
     price: 320,
     originalPrice: 360,
     quantity: '250 g',
-    image:
-      'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=80',
-    tag: 'Ocean fresh',
+    image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=80',
   },
 ]
 
