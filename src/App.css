@@ -352,10 +352,13 @@ button {
 
 .hero-grocery {
   position: absolute;
-  object-fit: cover;
-  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 22px;
   box-shadow: 0 12px 18px rgba(15, 23, 42, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--brand-strong);
 }
 
 .hero-banana {
@@ -577,8 +580,33 @@ button {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  background: #f4f5f3;
+  background: linear-gradient(135deg, #f5f7f3, #eef5ef);
   overflow: hidden;
+}
+
+.product-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: var(--brand-strong);
+  background: transparent;
+}
+
+.visual-backdrop {
+  position: absolute;
+  inset: 18px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(232, 244, 235, 0.85) 52%, rgba(217, 233, 218, 0.82) 100%);
+  border: 1px solid rgba(45, 143, 77, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.product-visual svg {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 8px 14px rgba(45, 143, 77, 0.12));
 }
 
 .product-image-wrap img {
@@ -971,11 +999,14 @@ button {
   background: #fafcfb;
 }
 
-.cart-item img {
+.cart-item-visual {
   width: 72px;
   height: 72px;
-  object-fit: cover;
+  display: grid;
+  place-items: center;
   border-radius: 10px;
+  background: linear-gradient(135deg, #edf8f0, #f4f7f2);
+  color: var(--brand-strong);
 }
 
 .cart-item-meta h4 {

@@ -4,10 +4,13 @@ import {
   Apple,
   ArrowRight,
   BadgePercent,
+  Banana,
+  Carrot,
   ChevronRight,
   Clock3,
   Coffee,
   Cookie,
+  Egg,
   Fish,
   Home,
   Leaf,
@@ -41,11 +44,17 @@ interface Product {
   price: number
   originalPrice?: number
   quantity: string
-  image: string
-  tag?: string
+  icon: LucideIcon
 }
 
-interface CartItem extends Product {
+interface CartItem {
+  id: string
+  name: string
+  category: string
+  price: number
+  originalPrice?: number
+  quantity: string
+  icon?: LucideIcon
   quantityCount: number
 }
 
@@ -63,249 +72,19 @@ const categories: Category[] = [
 ]
 
 const products: Product[] = [
-  {
-    id: 'bananas',
-    name: 'Bananas',
-    category: 'fruits',
-    price: 56,
-    originalPrice: 72,
-    quantity: '1 bunch',
-    image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'red-apples',
-    name: 'Red Apples',
-    category: 'fruits',
-    price: 124,
-    originalPrice: 149,
-    quantity: '1 kg',
-    image: 'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'oranges',
-    name: 'Oranges',
-    category: 'fruits',
-    price: 118,
-    originalPrice: 138,
-    quantity: '1 kg',
-    image: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'mangoes',
-    name: 'Mangoes',
-    category: 'fruits',
-    price: 135,
-    originalPrice: 160,
-    quantity: '1 kg',
-    image: 'https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'tomato',
-    name: 'Tomato',
-    category: 'fruits',
-    price: 42,
-    originalPrice: 52,
-    quantity: '1 kg',
-    image: 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'potato',
-    name: 'Potato',
-    category: 'fruits',
-    price: 36,
-    originalPrice: 44,
-    quantity: '1 kg',
-    image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'onion',
-    name: 'Onion',
-    category: 'fruits',
-    price: 38,
-    originalPrice: 46,
-    quantity: '1 kg',
-    image: 'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'spinach',
-    name: 'Spinach',
-    category: 'fruits',
-    price: 30,
-    originalPrice: 38,
-    quantity: '200 g',
-    image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'farm-milk',
-    name: 'Farm Fresh Milk',
-    category: 'dairy',
-    price: 54,
-    originalPrice: 66,
-    quantity: '1 litre',
-    image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'paneer',
-    name: 'Paneer Cubes',
-    category: 'dairy',
-    price: 110,
-    originalPrice: 128,
-    quantity: '200 g',
-    image: 'https://images.unsplash.com/photo-1604908553252-944e3d1d3127?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'plain-curd',
-    name: 'Plain Curd',
-    category: 'dairy',
-    price: 58,
-    originalPrice: 70,
-    quantity: '500 g',
-    image: 'https://images.unsplash.com/photo-1570587193867-0c0c0788f263?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'butter',
-    name: 'Farm Butter',
-    category: 'dairy',
-    price: 99,
-    originalPrice: 118,
-    quantity: '200 g',
-    image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'eggs',
-    name: 'Free Range Eggs',
-    category: 'dairy',
-    price: 82,
-    originalPrice: 95,
-    quantity: '6 pack',
-    image: 'https://images.unsplash.com/photo-1518569656558-1f25e69d93d7?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'whole-wheat-bread',
-    name: 'Whole Wheat Bread',
-    category: 'bakery',
-    price: 48,
-    originalPrice: 58,
-    quantity: '400 g',
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'multigrain-bread',
-    name: 'Multigrain Bread',
-    category: 'bakery',
-    price: 62,
-    originalPrice: 74,
-    quantity: '400 g',
-    image: 'https://images.unsplash.com/photo-1549931314-a545dcf3bc73?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'classic-salted-chips',
-    name: 'Classic Salted Chips',
-    category: 'snacks',
-    price: 32,
-    originalPrice: 40,
-    quantity: '55 g',
-    image: 'https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'biscuits',
-    name: 'Butter Biscuits',
-    category: 'snacks',
-    price: 54,
-    originalPrice: 66,
-    quantity: '200 g',
-    image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'namkeen',
-    name: 'Namkeen Mix',
-    category: 'snacks',
-    price: 60,
-    originalPrice: 72,
-    quantity: '250 g',
-    image: 'https://images.unsplash.com/photo-1599490650514-4f7f5d9a17a4?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'citrus-soda',
-    name: 'Citrus Soda',
-    category: 'beverages',
-    price: 68,
-    originalPrice: 78,
-    quantity: '250 ml',
-    image: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'orange-juice',
-    name: 'Orange Juice',
-    category: 'beverages',
-    price: 96,
-    originalPrice: 116,
-    quantity: '1 litre',
-    image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'mineral-water',
-    name: 'Mineral Water',
-    category: 'beverages',
-    price: 28,
-    originalPrice: 35,
-    quantity: '1 litre',
-    image: 'https://images.unsplash.com/photo-1622483767028-3f66f2b0a3d9?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'basmati-rice',
-    name: 'Basmati Rice',
-    category: 'staples',
-    price: 182,
-    originalPrice: 215,
-    quantity: '1 kg',
-    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31b?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'wheat-flour',
-    name: 'Wheat Flour',
-    category: 'staples',
-    price: 134,
-    originalPrice: 152,
-    quantity: '5 kg',
-    image: 'https://images.unsplash.com/photo-1574856344991-aaa31b6f4ce9?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'cooking-oil',
-    name: 'Cooking Oil',
-    category: 'staples',
-    price: 178,
-    originalPrice: 210,
-    quantity: '1 litre',
-    image: 'https://images.unsplash.com/photo-1474978528675-4a50a4508dc3?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'sugar',
-    name: 'Sugar',
-    category: 'staples',
-    price: 58,
-    originalPrice: 68,
-    quantity: '1 kg',
-    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'chicken',
-    name: 'Chicken Breast',
-    category: 'meat',
-    price: 214,
-    originalPrice: 246,
-    quantity: '500 g',
-    image: 'https://images.unsplash.com/photo-1607623814075-e51df1d6f6b4?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'salmon',
-    name: 'Salmon Fillet',
-    category: 'meat',
-    price: 320,
-    originalPrice: 360,
-    quantity: '250 g',
-    image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=80',
-  },
+  { id: 'bananas', name: 'Bananas', category: 'fruits', price: 56, originalPrice: 72, quantity: '1 bunch', icon: Banana },
+  { id: 'red-apples', name: 'Red Apples', category: 'fruits', price: 124, originalPrice: 149, quantity: '1 kg', icon: Apple },
+  { id: 'tomato', name: 'Tomatoes', category: 'fruits', price: 42, originalPrice: 52, quantity: '1 kg', icon: Leaf },
+  { id: 'spinach', name: 'Spinach', category: 'fruits', price: 30, originalPrice: 38, quantity: '200 g', icon: Leaf },
+  { id: 'carrot', name: 'Carrots', category: 'fruits', price: 40, originalPrice: 48, quantity: '1 kg', icon: Carrot },
+  { id: 'farm-milk', name: 'Farm Fresh Milk', category: 'dairy', price: 54, originalPrice: 66, quantity: '1 litre', icon: Milk },
+  { id: 'paneer', name: 'Paneer Cubes', category: 'dairy', price: 110, originalPrice: 128, quantity: '200 g', icon: Milk },
+  { id: 'plain-curd', name: 'Plain Curd', category: 'dairy', price: 58, originalPrice: 70, quantity: '500 g', icon: Milk },
+  { id: 'eggs', name: 'Free Range Eggs', category: 'dairy', price: 82, originalPrice: 95, quantity: '6 pack', icon: Egg },
+  { id: 'whole-wheat-bread', name: 'Whole Wheat Bread', category: 'bakery', price: 48, originalPrice: 58, quantity: '400 g', icon: Sandwich },
+  { id: 'basmati-rice', name: 'Basmati Rice', category: 'staples', price: 182, originalPrice: 215, quantity: '1 kg', icon: Package },
+  { id: 'chicken', name: 'Chicken Breast', category: 'meat', price: 214, originalPrice: 246, quantity: '500 g', icon: Package },
+  { id: 'salmon', name: 'Salmon Fillet', category: 'meat', price: 320, originalPrice: 360, quantity: '250 g', icon: Fish },
 ]
 
 const featureList = [
@@ -318,29 +97,6 @@ const featureList = [
 const deliveryThreshold = 499
 const formatCurrency = (amount: number) => `₹${amount.toLocaleString('en-IN')}`
 
-const createProductFallback = (productName: string) => {
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
-      <defs>
-        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stop-color="#edf9ef"/>
-          <stop offset="100%" stop-color="#e6f0ea"/>
-        </linearGradient>
-      </defs>
-      <rect width="800" height="600" fill="url(#g)"/>
-      <circle cx="400" cy="230" r="120" fill="#d9efdd"/>
-      <path d="M355 185 C385 145, 465 145, 495 185 L495 240 C495 285, 455 325, 400 325 C345 325, 305 285, 305 240 Z" fill="#8ec99e"/>
-      <path d="M290 282 L510 282" stroke="#3a8f5b" stroke-width="26" stroke-linecap="round"/>
-      <path d="M345 282 L345 415" stroke="#3a8f5b" stroke-width="22" stroke-linecap="round"/>
-      <path d="M455 282 L455 415" stroke="#3a8f5b" stroke-width="22" stroke-linecap="round"/>
-      <rect x="160" y="420" width="480" height="76" rx="20" fill="rgba(255,255,255,0.74)"/>
-      <text x="400" y="470" text-anchor="middle" font-size="42" font-family="Arial, sans-serif" fill="#1b6f35" font-weight="700">${productName}</text>
-    </svg>
-  `
-
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`
-}
-
 function ProductCard({
   product,
   quantityInCart,
@@ -352,25 +108,15 @@ function ProductCard({
   onAdd: (product: Product) => void
   onDecrease: (productId: string) => void
 }) {
-  const [imageSrc, setImageSrc] = useState(product.image)
-
-  useEffect(() => {
-    setImageSrc(product.image)
-  }, [product.image])
-
-  const hasBadge = Boolean(product.tag && product.tag.trim())
+  const Icon = product.icon
 
   return (
     <article className="product-card">
       <div className="product-image-wrap">
-        {hasBadge && <span className="product-tag">{product.tag}</span>}
-        <img
-          src={imageSrc}
-          alt={product.name}
-          onError={() => {
-            setImageSrc(createProductFallback(product.name))
-          }}
-        />
+        <div className="product-visual" aria-label={product.name}>
+          <div className="visual-backdrop" aria-hidden="true" />
+          <Icon size={68} strokeWidth={1.8} />
+        </div>
       </div>
 
       <div className="product-body">
@@ -421,7 +167,25 @@ function App() {
 
     try {
       const saved = window.localStorage.getItem('little-kart-cart')
-      return saved ? (JSON.parse(saved) as CartItem[]) : []
+      if (!saved) return []
+
+      const parsed = JSON.parse(saved) as Partial<CartItem>[]
+      return parsed
+        .map((item) => {
+          const productMatch = products.find((product) => product.id === item.id)
+
+          return {
+            id: item.id ?? productMatch?.id ?? '',
+            name: item.name ?? productMatch?.name ?? 'Product',
+            category: item.category ?? productMatch?.category ?? 'fruits',
+            price: item.price ?? productMatch?.price ?? 0,
+            originalPrice: item.originalPrice ?? productMatch?.originalPrice,
+            quantity: item.quantity ?? productMatch?.quantity ?? '',
+            icon: item.icon ?? productMatch?.icon ?? Apple,
+            quantityCount: item.quantityCount ?? 1,
+          }
+        })
+        .filter((item) => item.id)
     } catch {
       return []
     }
@@ -562,31 +326,21 @@ function App() {
 
           <div className="hero-visual" aria-label="Fresh groceries visual">
             <div className="basket-scene">
-              <img
-                className="hero-grocery hero-banana"
-                src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80"
-                alt="Bananas"
-              />
-              <img
-                className="hero-grocery hero-milk"
-                src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=600&q=80"
-                alt="Milk bottle"
-              />
-              <img
-                className="hero-grocery hero-tomato"
-                src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=600&q=80"
-                alt="Tomatoes"
-              />
-              <img
-                className="hero-grocery hero-leafy"
-                src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80"
-                alt="Leafy greens"
-              />
-              <img
-                className="hero-grocery hero-bread"
-                src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"
-                alt="Bread"
-              />
+              <div className="hero-grocery hero-banana" aria-label="Bananas illustration">
+                <Banana size={52} strokeWidth={1.7} />
+              </div>
+              <div className="hero-grocery hero-milk" aria-label="Milk illustration">
+                <Milk size={42} strokeWidth={1.8} />
+              </div>
+              <div className="hero-grocery hero-tomato" aria-label="Tomato illustration">
+                <Leaf size={46} strokeWidth={1.8} />
+              </div>
+              <div className="hero-grocery hero-leafy" aria-label="Leafy greens illustration">
+                <Leaf size={54} strokeWidth={1.8} />
+              </div>
+              <div className="hero-grocery hero-bread" aria-label="Bread illustration">
+                <Sandwich size={48} strokeWidth={1.8} />
+              </div>
 
               <div className="basket-card">
                 <div className="basket-header">
@@ -806,30 +560,36 @@ function App() {
         ) : (
           <>
             <div className="cart-items">
-              {cart.map((item) => (
-                <div key={item.id} className="cart-item">
-                  <img src={item.image} alt={item.name} />
-                  <div className="cart-item-meta">
-                    <div className="cart-item-header">
-                      <h4>{item.name}</h4>
-                      <button type="button" className="cart-remove" onClick={() => removeFromCart(item.id)}>
-                        Remove
-                      </button>
+              {cart.map((item) => {
+                const CartIcon = item.icon ?? Apple
+
+                return (
+                  <div key={item.id} className="cart-item">
+                    <div className="cart-item-visual" aria-label={item.name}>
+                      <CartIcon size={24} />
                     </div>
-                    <p>{item.quantity}</p>
-                    <div className="cart-controls">
-                      <button type="button" onClick={() => updateQuantity(item.id, -1)}>
-                        <Minus size={14} />
-                      </button>
-                      <span>{item.quantityCount}</span>
-                      <button type="button" onClick={() => addToCart(item)}>
-                        <Plus size={14} />
-                      </button>
+                    <div className="cart-item-meta">
+                      <div className="cart-item-header">
+                        <h4>{item.name}</h4>
+                        <button type="button" className="cart-remove" onClick={() => removeFromCart(item.id)}>
+                          Remove
+                        </button>
+                      </div>
+                      <p>{item.quantity}</p>
+                      <div className="cart-controls">
+                        <button type="button" onClick={() => updateQuantity(item.id, -1)}>
+                          <Minus size={14} />
+                        </button>
+                        <span>{item.quantityCount}</span>
+                        <button type="button" onClick={() => addToCart({ ...item, icon: item.icon ?? Apple })}>
+                          <Plus size={14} />
+                        </button>
+                      </div>
                     </div>
+                    <div className="cart-price">{formatCurrency(item.price * item.quantityCount)}</div>
                   </div>
-                  <div className="cart-price">{formatCurrency(item.price * item.quantityCount)}</div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             <div className="cart-summary">
