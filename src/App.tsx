@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import {
   Apple,
+  ArrowLeft,
   ArrowRight,
   BadgePercent,
   ChevronRight,
@@ -214,6 +215,9 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isOfferOpen, setIsOfferOpen] = useState(false)
+  const [isCheckoutProcessing, setIsCheckoutProcessing] = useState(false)
+  const [isOrderSuccessOpen, setIsOrderSuccessOpen] = useState(false)
+  const [orderReference, setOrderReference] = useState('')
   const [cart, setCart] = useState<CartItem[]>(() => {
     if (typeof window === 'undefined') return []
 
@@ -257,6 +261,17 @@ function App() {
     document.addEventListener('keydown', handleEscape)
     return () => document.removeEventListener('keydown', handleEscape)
   }, [isOfferOpen])
+
+  useEffect(() => {
+    if (!isOrderSuccessOpen) return
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsOrderSuccessOpen(false)
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [isOrderSuccessOpen])
 
   const filteredProducts = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase()
@@ -305,6 +320,25 @@ function App() {
 
   const removeFromCart = (productId: string) => {
     setCart((currentCart) => currentCart.filter((item) => item.id !== productId))
+  }
+
+  const startCheckout = () => {
+    if (cart.length === 0 || isCheckoutProcessing) return
+
+    setIsCheckoutProcessing(true)
+    window.setTimeout(() => {
+      setIsCheckoutProcessing(false)
+      setOrderReference(`LK-${Math.floor(1000 + Math.random() * 9000)}`)
+      setCart([])
+      setIsCartOpen(false)
+      setIsOrderSuccessOpen(true)
+    }, 800)
+  }
+
+  const continueShopping = () => {
+    setIsCartOpen(false)
+    setIsOrderSuccessOpen(false)
+    scrollToSection('products')
   }
 
   return (
@@ -587,7 +621,11 @@ function App() {
 
       <aside className={`cart-drawer ${isCartOpen ? 'open' : ''}`}>
         <div className="cart-header">
-          <div>
+          <div className="cart-heading">
+            <button type="button" className="cart-back" onClick={() => setIsCartOpen(false)}>
+              <ArrowLeft size={16} />
+              Continue shopping
+            </button>
             <p className="section-kicker">Your cart</p>
             <h3>{cartCount} items</h3>
           </div>
@@ -657,8 +695,8 @@ function App() {
                 <span>Total</span>
                 <strong>{formatCurrency(total)}</strong>
               </div>
-              <button type="button" className="primary-button checkout-btn">
-                Checkout • {formatCurrency(total)}
+              <button type="button" className="primary-button checkout-btn" onClick={startCheckout} disabled={isCheckoutProcessing}>
+                {isCheckoutProcessing ? 'Placing your order...' : `Checkout • ${formatCurrency(total)}`}
               </button>
             </div>
           </>
@@ -695,6 +733,28 @@ function App() {
                 Close
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {isOrderSuccessOpen && (
+        <div className="success-modal-backdrop" onClick={() => setIsOrderSuccessOpen(false)}>
+          <div
+            className="success-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="success-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="success-mark" aria-hidden="true">
+              <span>✓</span>
+            </div>
+            <h2 id="success-modal-title">Order placed!</h2>
+            <p>Your order has been placed successfully.</p>
+            <span className="order-reference">Order #{orderReference}</span>
+            <button type="button" className="primary-button" onClick={continueShopping}>
+              Continue shopping
+            </button>
           </div>
         </div>
       )}

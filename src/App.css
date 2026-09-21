@@ -914,7 +914,7 @@ button {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
-  z-index: 40;
+  z-index: 55;
 }
 
 .cart-overlay.visible {
@@ -933,7 +933,7 @@ button {
   box-shadow: -12px 0 24px rgba(15, 23, 42, 0.08);
   transform: translateX(100%);
   transition: transform 0.25s ease;
-  z-index: 50;
+  z-index: 65;
   display: flex;
   flex-direction: column;
 }
@@ -1523,7 +1523,7 @@ button {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
-  z-index: 45;
+  z-index: 55;
 }
 
 .cart-overlay.visible {
@@ -1543,7 +1543,7 @@ button {
   box-shadow: -14px 0 34px rgba(15, 23, 42, 0.14);
   transform: translateX(100%);
   transition: transform 0.25s ease;
-  z-index: 50;
+  z-index: 65;
 }
 
 .cart-drawer.open {
@@ -1556,6 +1556,23 @@ button {
   justify-content: space-between;
   padding: 20px 20px 14px;
   border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.cart-heading {
+  min-width: 0;
+}
+
+.cart-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--brand-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 .cart-header h3 {
@@ -1710,6 +1727,101 @@ button {
 .checkout-btn {
   width: 100%;
   margin-top: 12px;
+}
+
+.checkout-btn:disabled {
+  cursor: wait;
+  opacity: 0.78;
+  transform: none;
+}
+
+.success-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(25, 102, 49, 0.2);
+}
+
+.success-modal {
+  width: min(100%, 420px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 34px 32px 30px;
+  border: 1px solid rgba(45, 143, 77, 0.14);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  text-align: center;
+  animation: success-modal-in 0.24s ease-out both;
+}
+
+.success-mark {
+  width: 66px;
+  height: 66px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+  box-shadow: 0 0 0 10px rgba(45, 143, 77, 0.08);
+  animation: success-mark-in 0.4s 0.08s ease-out both;
+}
+
+.success-mark span {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.success-modal h2 {
+  margin: 22px 0 0;
+  color: var(--text);
+  font-size: 1.8rem;
+  letter-spacing: -0.04em;
+}
+
+.success-modal p {
+  max-width: 280px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.order-reference {
+  margin-top: 14px;
+  color: var(--brand-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.success-modal .primary-button {
+  margin-top: 24px;
+}
+
+@keyframes success-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes success-mark-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 1080px) {
