@@ -942,6 +942,71 @@ button {
   transform: translateX(0);
 }
 
+.offer-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.32);
+}
+
+.offer-modal {
+  position: relative;
+  width: min(100%, 440px);
+  padding: 34px 32px 30px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  text-align: center;
+}
+
+.offer-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8f9f7;
+  color: var(--text);
+}
+
+.offer-modal .section-kicker {
+  margin-bottom: 10px;
+}
+
+.offer-modal h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  letter-spacing: -0.04em;
+}
+
+.offer-modal > p:not(.section-kicker) {
+  max-width: 320px;
+  margin: 12px auto 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.offer-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.offer-modal-actions .primary-button,
+.offer-modal-actions .secondary-button {
+  min-width: 132px;
+}
+
 .cart-header {
   display: flex;
   align-items: center;

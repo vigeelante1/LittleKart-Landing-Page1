@@ -114,6 +114,9 @@ const featureList = [
 
 const deliveryThreshold = 499
 const formatCurrency = (amount: number) => `₹${amount.toLocaleString('en-IN')}`
+const scrollToSection = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
 
 function ProductCard({
   product,
@@ -185,11 +188,13 @@ function PromoBanner({
   title,
   action,
   tone,
+  onAction,
 }: {
   eyebrow: string
   title: string
   action: string
   tone: 'primary' | 'secondary'
+  onAction: () => void
 }) {
   return (
     <article className={`promo-banner ${tone === 'primary' ? 'primary-promo' : 'secondary-promo'}`}>
@@ -197,7 +202,7 @@ function PromoBanner({
         <p className="promo-label">{eyebrow}</p>
         <h3>{title}</h3>
       </div>
-      <button type="button" className="mini-button promo-action">
+      <button type="button" className="mini-button promo-action" onClick={onAction}>
         {action}
       </button>
     </article>
@@ -208,6 +213,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isOfferOpen, setIsOfferOpen] = useState(false)
   const [cart, setCart] = useState<CartItem[]>(() => {
     if (typeof window === 'undefined') return []
 
@@ -240,6 +246,17 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem('little-kart-cart', JSON.stringify(cart))
   }, [cart])
+
+  useEffect(() => {
+    if (!isOfferOpen) return
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsOfferOpen(false)
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [isOfferOpen])
 
   const filteredProducts = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase()
@@ -351,10 +368,10 @@ function App() {
               usual store run.
             </p>
             <div className="hero-actions">
-              <button type="button" className="primary-button">
+              <button type="button" className="primary-button" onClick={() => scrollToSection('products')}>
                 Shop Groceries <ArrowRight size={18} />
               </button>
-              <button type="button" className="secondary-button">
+              <button type="button" className="secondary-button" onClick={() => scrollToSection('categories')}>
                 Explore Categories
               </button>
             </div>
@@ -412,11 +429,23 @@ function App() {
         </section>
 
         <section className="promo-grid">
-          <PromoBanner eyebrow="Fresh picks" title="Fresh picks. Better prices." action="Shop now" tone="primary" />
-          <PromoBanner eyebrow="First order" title="Free delivery on your first order." action="Claim offer" tone="secondary" />
+          <PromoBanner
+            eyebrow="Fresh picks"
+            title="Fresh picks. Better prices."
+            action="Shop now"
+            tone="primary"
+            onAction={() => scrollToSection('products')}
+          />
+          <PromoBanner
+            eyebrow="First order"
+            title="Free delivery on your first order."
+            action="Claim offer"
+            tone="secondary"
+            onAction={() => setIsOfferOpen(true)}
+          />
         </section>
 
-        <section className="category-section">
+        <section id="categories" className="category-section">
           <div className="section-heading-row">
             <div>
               <p className="section-kicker">Browse</p>
@@ -448,7 +477,7 @@ function App() {
           </div>
         </section>
 
-        <section className="products-section">
+        <section id="products" className="products-section">
           <div className="section-heading-row">
             <div>
               <p className="section-kicker">Top picks</p>
@@ -635,6 +664,40 @@ function App() {
           </>
         )}
       </aside>
+
+      {isOfferOpen && (
+        <div className="offer-modal-backdrop" onClick={() => setIsOfferOpen(false)}>
+          <div
+            className="offer-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="offer-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button type="button" className="offer-modal-close" aria-label="Close offer" onClick={() => setIsOfferOpen(false)}>
+              <X size={18} />
+            </button>
+            <p className="section-kicker">Free delivery</p>
+            <h2 id="offer-modal-title">Free delivery above ₹199</h2>
+            <p>Shop now and get free delivery on qualifying orders above ₹199.</p>
+            <div className="offer-modal-actions">
+              <button
+                type="button"
+                className="primary-button"
+                onClick={() => {
+                  setIsOfferOpen(false)
+                  scrollToSection('products')
+                }}
+              >
+                Shop Groceries
+              </button>
+              <button type="button" className="secondary-button" onClick={() => setIsOfferOpen(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
