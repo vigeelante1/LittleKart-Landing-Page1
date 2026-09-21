@@ -378,21 +378,21 @@ function App() {
 
         <section className="promo-grid">
           <article className="promo-card primary-promo">
-            <div>
+            <div className="promo-content">
               <p className="promo-label">Fresh picks</p>
               <h3>Fresh picks. Better prices.</h3>
             </div>
-            <button type="button" className="mini-button">
+            <button type="button" className="mini-button promo-action">
               Shop now
             </button>
           </article>
 
           <article className="promo-card secondary-promo">
-            <div>
+            <div className="promo-content">
               <p className="promo-label">First order</p>
               <h3>Free delivery on your first order.</h3>
             </div>
-            <button type="button" className="mini-button light-button">
+            <button type="button" className="mini-button promo-action light-button">
               Claim offer
             </button>
           </article>
